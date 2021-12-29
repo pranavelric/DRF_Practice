@@ -19,13 +19,11 @@ class UserAddShowView(TemplateView):
         if fm.is_valid():
             nm = fm.cleaned_data['name']
             em = fm.cleaned_data['email']
-            pw = fm.cleaned_data['pw']
+            pw = fm.cleaned_data['password']
             reg = User(name=nm,email=em,password=pw)
             reg.save()
             return HttpResponseRedirect('/')
 
 class UserUpdateView(View):
     def get(self,request,id):
-        pi = User.objects.get(id=id)
-        fm = StudentRegisteration(instance=pi)
-        
+        pass
