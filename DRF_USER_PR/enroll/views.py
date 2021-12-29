@@ -24,6 +24,35 @@ class UserAddShowView(TemplateView):
             reg.save()
             return HttpResponseRedirect('/')
 
-class UserUpdateView(View):
+class UserUpdateView(TemplateView):
+    template_name = 'enroll/update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        id = kwargs['id']
+        stud = User.objects.get(pk=id)
+        fm = StudentRegisteration(instance=stud)
+
+        context = {'stu': stud, 'form': fm}
+        return context
+
+
+    def post(self,request,id):
+        stud = User.objects.get(pk=id)
+        fm = StudentRegisteration(request.POST,instance=stud)
+        if fm.is_valid():
+            nm = fm.cleaned_data['name']
+            em = fm.cleaned_data['email']
+            pw = fm.cleaned_data['password']
+            reg = User(pk=id,name=nm, email=em, password=pw)
+            reg.save()
+            return HttpResponseRedirect('/')
+
+
+
+
+class DeleteUser(View):
     def get(self,request,id):
-        pass
+        pi = User.objects.get(pk=id)
+        pi.delete()
+        return HttpResponseRedirect('/')
