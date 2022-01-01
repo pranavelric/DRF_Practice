@@ -36,7 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'authentication'
+    'authentication',
+    'contacts',
+    'drf_yasg',
+
 ]
 
 MIDDLEWARE = [
@@ -119,6 +122,19 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SWAGGER_SETTINGS = {
+
+    'SECURITY_DEFINITIONS': {
+        'Auth Token eg [Beared (JWT)]': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+
+
+}
+
 
 # JWT
 JWT_SECRET_KEY = "sadasdsadsa"
@@ -127,3 +143,4 @@ REST_FRAMEWORK = {
         'authentication.backends.JWTAuthentication',
     )
 }
+
