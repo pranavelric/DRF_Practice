@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,9 +133,7 @@ SWAGGER_SETTINGS = {
         }
     },
 
-
 }
-
 
 # JWT
 JWT_SECRET_KEY = "sadasdsadsa"
@@ -143,4 +142,6 @@ REST_FRAMEWORK = {
         'authentication.backends.JWTAuthentication',
     )
 }
+
+django_heroku.settings(locals())
 
